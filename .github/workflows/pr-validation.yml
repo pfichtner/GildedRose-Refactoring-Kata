@@ -30,6 +30,9 @@ jobs:
            const path = require('path');
 
            const prBody = context.payload.pull_request.body || "";
+           if (prBody.includes("- [ ]")) {
+             return { is_suspect: true };
+           }
 
            // Read the PR template
            const templatePath = path.join(process.env.GITHUB_WORKSPACE, ".github/pull_request_template.md");
