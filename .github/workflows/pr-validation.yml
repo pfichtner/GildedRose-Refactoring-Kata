@@ -30,7 +30,8 @@ jobs:
            const path = require('path');
 
            const prBody = context.payload.pull_request.body || "";
-           if (prBody.includes("- [ ]")) {
+           const uncheckedBox = /^- \[ \]/m;  // ^ = start of line, m = multiline
+           if (uncheckedBox.test(prBody)) {
              return { is_suspect: 'true' };
            }
 
