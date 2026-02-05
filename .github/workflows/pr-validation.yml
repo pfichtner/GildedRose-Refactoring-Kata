@@ -31,7 +31,7 @@ jobs:
 
            const prBody = context.payload.pull_request.body || "";
            if (prBody.includes("- [ ]")) {
-             return { is_suspect: true };
+             return { is_suspect: 'true' };
            }
 
            // Read the PR template
@@ -57,7 +57,7 @@ jobs:
            const lastLine = templateLines[templateLines.length - 1];
            const isSuspect = diffLines.length === 0 || (diffLines.length === 1 && diffLines[0] === lastLine);
 
-           return { is_suspect: isSuspect };
+           return { is_suspect: isSuspect ? 'true' : 'false' };
 
       - name: Add solution label
         if: steps.check.outputs.is_suspect == 'true'
